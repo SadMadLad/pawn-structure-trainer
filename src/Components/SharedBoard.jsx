@@ -6,9 +6,11 @@ import PawnBoard from "./PawnBoard";
 export default function SharedBoard() {
   const [pawnFen, setPawnFen] = useState('4k3/pppppppp/8/8/8/8/PPPPPPPP/4K3 w - - 1 1');
 
- return (<>
-  <MainBoard setPawnFen={setPawnFen} />
-  <br />
-  <PawnBoard fen={pawnFen} />
- </>);
+  return (
+    <div className="flex flex-col sm:flex-row justify-around px-20">
+      <MainBoard setPawnFen={setPawnFen} />
+      <br />
+      <PawnBoard fen={pawnFen} />
+    </div>
+  );
 }

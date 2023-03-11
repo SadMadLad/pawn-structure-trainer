@@ -3,7 +3,7 @@ import { Chess } from 'chess.js'
 
 import { useState } from 'react'
 
-export default function MainBoard ({ setPawnFen }) {
+export default function MainBoard({ setPawnFen }) {
   const [game, setGame] = useState(new Chess())
 
   const fetchPawnPositions = board => {
@@ -40,11 +40,14 @@ export default function MainBoard ({ setPawnFen }) {
   }
 
   return (
-    <Chessboard
-      id='MainBoard'
-      boardWidth={560}
-      onPieceDrop={makeMove}
-      position={game.fen()}
-    />
+    <div>
+      <p className="text-2xl font-semibold text-center m-4">Play your move on this board</p>
+      <Chessboard
+        id='MainBoard'
+        boardWidth={560}
+        onPieceDrop={makeMove}
+        position={game.fen()}
+      />
+    </div>
   )
 }
