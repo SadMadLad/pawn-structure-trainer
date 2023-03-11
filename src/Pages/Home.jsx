@@ -1,10 +1,9 @@
-import MainBoard from "../Components/MainBoard";
-
+import SharedBoard from "../Components/SharedBoard";
 
 export default function Home() {
   return(
     <>
-      <MainBoard />
+      <SharedBoard />
     </>
   );
 }
