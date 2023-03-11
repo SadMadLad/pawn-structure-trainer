@@ -44,7 +44,7 @@ export default function MainBoard({ setPawnFen }) {
       <p className="text-2xl font-semibold text-center m-4">Play your move on this board</p>
       <Chessboard
         id='MainBoard'
-        boardWidth={560}
+        boardWidth={500}
         onPieceDrop={makeMove}
         position={game.fen()}
       />
