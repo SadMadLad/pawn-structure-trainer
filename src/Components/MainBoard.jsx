@@ -14,7 +14,7 @@ export default function MainBoard({ setPawnFen }) {
     board.forEach(row => {
       row.forEach(square => {
         if (square) {
-          if (square.type === 'p' || square.type === 'k') {
+          if (square.type === 'p') {
             pawns[square.square] = `${square.color}${square.type.toUpperCase()}`
           }
         }
@@ -23,40 +23,35 @@ export default function MainBoard({ setPawnFen }) {
     return pawns
   }
 
-  const makeMove = (sourceSquare, targetSquare) => {
-    const move = { from: sourceSquare, to: targetSquare }
-    let result = false
-    try {
-      const gameCopy = new Chess()
-      gameCopy.loadPgn(game.pgn())
-
-      gameCopy.move(move)
-      const pawnPositions = fetchPawnPositions(gameCopy.board())
-
-      setGame(gameCopy)
-      setPawnFen(pawnPositions)
-    } catch (err) {
-      console.log('Invalid Move')
-    }
-    return result
-  }
-
-  const popHistory = () => {
+  const updateBoard = (move = false, undo = false) => {
     const gameCopy = new Chess()
     gameCopy.loadPgn(game.pgn())
-    gameCopy.undo()
+    if (move) { gameCopy.move(move) }
+    if (undo) { gameCopy.undo() }
+
     const pawnPositions = fetchPawnPositions(gameCopy.board())
 
-    setGame(gameCopy);
+    setGame(gameCopy)
     setPawnFen(pawnPositions)
   }
 
-  const putMove = () => {
+  const makeMove = (sourceSquare, targetSquare) => {
+    const move = { from: sourceSquare, to: targetSquare }
+    try {
+      updateBoard(move);
+    } catch (err) {
+      console.log(err)
+      console.log('Invalid Move')
+    }
+  }
 
+  const popHistory = () => {
+    updateBoard(false, true);
   }
 
   return (
     <div>
+      <Horizontal />
       <div className='flex'>
         <Chessboard
           id='MainBoard'
@@ -69,9 +64,8 @@ export default function MainBoard({ setPawnFen }) {
       </div>
       <Horizontal />
       <div className='flex justify-center items-center'>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-5" onClick={popHistory}>Undo Move</button>
+        <button className="bg-gray-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded my-5" onClick={popHistory}>Undo Move</button>
       </div>
-      <button className="bg-green-500" onClick={putMove}>Put Move</button>
     </div>
   )
 }

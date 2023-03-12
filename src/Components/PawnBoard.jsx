@@ -6,6 +6,7 @@ import Vertical from './Vertical'
 export default function PawnBoard({ fen }) {
   return (
     <div>
+      <Horizontal />
       <div className='flex'>
         <Chessboard
           id='Pawnboard'
