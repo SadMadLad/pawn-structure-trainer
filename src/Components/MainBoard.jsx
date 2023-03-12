@@ -1,7 +1,9 @@
 import { Chessboard } from 'react-chessboard'
 import { Chess } from 'chess.js'
-
 import { useState } from 'react'
+
+import Horizontal from './Horizontal'
+import Vertical from './Vertical'
 
 export default function MainBoard({ setPawnFen }) {
   const [game, setGame] = useState(new Chess())
@@ -27,11 +29,11 @@ export default function MainBoard({ setPawnFen }) {
     try {
       const gameCopy = new Chess()
       gameCopy.loadPgn(game.pgn())
-      setGame(gameCopy)
 
       gameCopy.move(move)
       const pawnPositions = fetchPawnPositions(gameCopy.board())
 
+      setGame(gameCopy)
       setPawnFen(pawnPositions)
     } catch (err) {
       console.log('Invalid Move')
@@ -39,15 +41,31 @@ export default function MainBoard({ setPawnFen }) {
     return result
   }
 
+  const popHistory = () => {
+    const gameCopy = new Chess()
+    gameCopy.loadPgn(game.pgn())
+    gameCopy.undo()
+    const pawnPositions = fetchPawnPositions(gameCopy.board())
+
+    setGame(gameCopy);
+    setPawnFen(pawnPositions)
+  }
+
   return (
     <div>
-      <p className="text-2xl font-semibold text-center m-4">Play your move on this board</p>
-      <Chessboard
-        id='MainBoard'
-        boardWidth={500}
-        onPieceDrop={makeMove}
-        position={game.fen()}
-      />
+      <div className='flex'>
+        <Chessboard
+          id='MainBoard'
+          boardWidth={500}
+          onPieceDrop={makeMove}
+          position={game.fen()}
+        />
+        <Vertical />
+      </div>
+      <Horizontal />
+      <div className='flex justify-center items-center'>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-5" onClick={popHistory}>Undo Move</button>
+      </div>
     </div>
   )
 }
