@@ -63,8 +63,8 @@ export default function MainBoard({ setPawnFen }) {
         <Vertical />
       </div>
       <Horizontal />
-      <div className='flex justify-center items-center'>
-        <button className="bg-gray-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded my-5" onClick={popHistory}>Undo Move</button>
+      <div className='flex justify-end items-center'>
+        <button className="bg-gray-400 hover:bg-gray-700 text-white font-bold px-5 py-3 rounded my-5" onClick={popHistory}>Undo Move</button>
       </div>
     </div>
   )
