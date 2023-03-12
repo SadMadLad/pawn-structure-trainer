@@ -12,6 +12,7 @@ export default function PawnBoard({ fen }) {
           boardWidth={500}
           position={fen}
           arePiecesDraggable={false}
+          showBoardNotation={false}
         />
         <Vertical />
       </div>

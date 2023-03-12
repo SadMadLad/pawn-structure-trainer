@@ -51,6 +51,10 @@ export default function MainBoard({ setPawnFen }) {
     setPawnFen(pawnPositions)
   }
 
+  const putMove = () => {
+
+  }
+
   return (
     <div>
       <div className='flex'>
@@ -59,6 +63,7 @@ export default function MainBoard({ setPawnFen }) {
           boardWidth={500}
           onPieceDrop={makeMove}
           position={game.fen()}
+          showBoardNotation={false}
         />
         <Vertical />
       </div>
@@ -66,6 +71,7 @@ export default function MainBoard({ setPawnFen }) {
       <div className='flex justify-center items-center'>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-5" onClick={popHistory}>Undo Move</button>
       </div>
+      <button className="bg-green-500" onClick={putMove}>Put Move</button>
     </div>
   )
 }
