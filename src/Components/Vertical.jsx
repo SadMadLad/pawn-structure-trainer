@@ -3,7 +3,7 @@ export default function Vertical() {
 
   return (
     <span className='flex flex-col' style={{ height: 500, width: 25 }}>
-      {numbers.map(number => <p className="flex-1 flex text-center justify-center items-center">{number}</p>)}
+      {numbers.map(number => <p className="flex-1 flex text-center justify-center items-center" key={number}>{number}</p>)}
     </span>
   );
 }
