@@ -1,14 +1,9 @@
 export default function Vertical() {
+  const numbers = [8, 7, 6, 5, 4, 3, 2, 1];
+
   return (
-    <span className='flex flex-col' style={{ height: 500, width: 25}}>
-      <p className='flex-1 flex text-center justify-center items-center'>8</p>
-      <p className='flex-1 flex text-center justify-center items-center'>7</p>
-      <p className='flex-1 flex text-center justify-center items-center'>6</p>
-      <p className='flex-1 flex text-center justify-center items-center'>5</p>
-      <p className='flex-1 flex text-center justify-center items-center'>4</p>
-      <p className='flex-1 flex text-center justify-center items-center'>3</p>
-      <p className='flex-1 flex text-center justify-center items-center'>2</p>
-      <p className='flex-1 flex text-center justify-center items-center'>1</p>
+    <span className='flex flex-col' style={{ height: 500, width: 25 }}>
+      {numbers.map(number => <p className="flex-1 flex text-center justify-center items-center">{number}</p>)}
     </span>
   );
 }
