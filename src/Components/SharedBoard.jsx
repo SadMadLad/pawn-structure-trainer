@@ -55,7 +55,7 @@ export default function SharedBoard() {
         <div>
           <MainBoard game={game} makeMove={makeMove} />
           <div className='flex justify-center items-center my-2'>
-            <button className="bg-gray-400 hover:bg-gray-700 text-white font-bold px-5 py-4 ml-20 rounded" onClick={popHistory}>Undo Move</button>
+            <button className="bg-gray-400 hover:bg-gray-700 text-white font-bold px-5 py-4 ml-16 rounded" onClick={popHistory}>Undo Move</button>
           </div>
         </div>
         <div className="pl-5">
