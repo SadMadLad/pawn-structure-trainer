@@ -51,11 +51,11 @@ export default function SharedBoard() {
 
   return (
     <>
-    <div className="py-5 flex flex-col sm:flex-row justify-around">
+    <div className="py-5 flex flex-col sm:flex-row">
       <MainBoard game={game} makeMove={makeMove} />
-      <br />
-      <PawnBoard fen={pawnFen} />
-      <br />
+      <div className="pl-5">
+        <PawnBoard fen={pawnFen} />
+      </div>
     </div>
     <div className='flex justify-center items-center'>
         <button className="bg-gray-400 hover:bg-gray-700 text-white font-bold px-5 py-4 rounded" onClick={popHistory}>Undo Move</button>
