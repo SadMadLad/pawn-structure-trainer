@@ -1,6 +1,4 @@
 import { Chessboard } from 'react-chessboard'
-import { Chess } from 'chess.js'
-import { useState } from 'react'
 
 import Horizontal from './Horizontal'
 import Vertical from './Vertical'
@@ -11,6 +9,8 @@ export default function MainBoard({ makeMove, game }) {
     <div>
       <Horizontal />
       <div className='flex'>
+        <Vertical />
+        <div>
         <Chessboard
           id='MainBoard'
           boardWidth={500}
@@ -18,6 +18,7 @@ export default function MainBoard({ makeMove, game }) {
           position={game.fen()}
           showBoardNotation={false}
         />
+        </div>
         <Vertical />
       </div>
       <Horizontal />

@@ -8,17 +8,19 @@ export default function PawnBoard({ fen }) {
     <div>
       <Horizontal />
       <div className='flex'>
-        <Chessboard
-          id='Pawnboard'
-          boardWidth={500}
-          position={fen}
-          arePiecesDraggable={false}
-          showBoardNotation={false}
-        />
+        <Vertical />
+        <div>
+          <Chessboard
+            id='Pawnboard'
+            boardWidth={500}
+            position={fen}
+            arePiecesDraggable={false}
+            showBoardNotation={false}
+          />
+        </div>
         <Vertical />
       </div>
       <Horizontal />
     </div>
-
   )
 }
