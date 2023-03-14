@@ -4,7 +4,6 @@ import Horizontal from './Horizontal'
 import Vertical from './Vertical'
 
 export default function MainBoard({ makeMove, game }) {
-
   return (
     <div>
       <Horizontal />
