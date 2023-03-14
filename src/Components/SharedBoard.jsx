@@ -7,6 +7,7 @@ import PawnBoard from "./PawnBoard";
 export default function SharedBoard() {
   const [pawnFen, setPawnFen] = useState('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1');
   const [game, setGame] = useState(new Chess())
+  const [movesDisplay, setMovesDisplay] = useState('')
 
   // PGN related states
   const [counter, setCounter] = useState(0)
@@ -31,17 +32,17 @@ export default function SharedBoard() {
 
   const updateBoard = (move = false, undo = false, pgn = false, reset = false) => {
     const gameCopy = new Chess()
-    if(!reset) { gameCopy.loadPgn(game.pgn()) }
+    if (!reset) { gameCopy.loadPgn(game.pgn()) }
     if (move) { gameCopy.move(move) }
     if (undo) { gameCopy.undo() }
     if (pgn) {
-      if(pgn === 'forward' && counter < pgnMoves.length) {
+      if (pgn === 'forward' && counter < pgnMoves.length) {
         const increaseCounter = counter + 1
         setCounter(increaseCounter)
         updateBoard(pgnMoves[counter], false, false)
         return
       }
-      else if(pgn === 'back' && counter > 0) {
+      else if (pgn === 'back' && counter > 0) {
         const decreaseCounter = counter - 1
         setCounter(decreaseCounter)
         updateBoard(false, true, false)
@@ -53,6 +54,7 @@ export default function SharedBoard() {
 
     setGame(gameCopy)
     setPawnFen(pawnPositions)
+    setMovesDisplay(gameCopy.pgn())
   }
 
   // Board State Methods
@@ -96,26 +98,41 @@ export default function SharedBoard() {
     updateBoard(false, false, 'back')
   }
 
+  const buttonClass = "bg-gray-400 hover:bg-gray-700 text-white font-bold px-5 py-4 rounded mx-2"
+
   return (
-    <div className="py-5 flex flex-col sm:flex-row justify-around">
-      <div>
-        <MainBoard game={game} makeMove={makeMove} />
-        <div className='flex justify-center items-center my-2'>
-          <button className="bg-gray-400 hover:bg-gray-700 text-white font-bold px-5 py-4 rounded" onClick={popHistory}>Undo Move</button>
-          <label htmlFor="file-upload" className="bg-green-500 hover:bg-green-900 text-white font-bold px-5 py-4 rounded mx-5">
+    <div>
+      <div className="py-2 flex flex-col sm:flex-row justify-around">
+        <div>
+          <MainBoard game={game} makeMove={makeMove} />
+
+        </div>
+        <div>
+          <PawnBoard fen={pawnFen} />
+        </div>
+      </div>
+      <div className='grid grid-cols-12'>
+        <div className='col-span-1'></div>
+        <div className="col-span-4 flex justify-center items-center my-2">
+          <button className={buttonClass} onClick={popHistory}>Undo Move</button>
+          <label htmlFor="file-upload" className={buttonClass}>
             Upload PGN
           </label>
           <input className="hidden" id="file-upload" type="file" onChange={handlePgn} />
+        </div>
+        <div className="col-span-2 flex justify-center items-center">
           {
             controls &&
-            <div>
-              <button className="bg-blue-400 hover:bg-gray-700 text-white font-bold px-5 py-4 rounded" onClick={moveBack}>{'<'}</button>
-              <button className="bg-red-400 hover:bg-gray-700 text-white font-bold px-5 py-4 rounded" onClick={moveForward}>{'>'}</button>
-            </div>
+            <>
+              <button className={buttonClass} onClick={moveBack}>{'<'}</button>
+              <button className={buttonClass} onClick={moveForward}>{'>'}</button>
+            </>
           }
         </div>
+        <div className="col-span-4"></div>
+
       </div>
-      <PawnBoard fen={pawnFen} />
+      <div className="text-center px-8 my-2">{movesDisplay}</div>
     </div>
   );
 }

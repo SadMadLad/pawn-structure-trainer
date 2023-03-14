@@ -12,7 +12,7 @@ export default function MainBoard({ makeMove, game }) {
         <div>
         <Chessboard
           id='MainBoard'
-          boardWidth={500}
+          boardWidth={450}
           onPieceDrop={makeMove}
           position={game.fen()}
           showBoardNotation={false}
