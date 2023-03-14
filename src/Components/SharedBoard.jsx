@@ -5,7 +5,7 @@ import MainBoard from "./MainBoard";
 import PawnBoard from "./PawnBoard";
 import Controller from "./Controller";
 
-const WIDTH = 300;
+const WIDTH = 400;
 
 export default function SharedBoard() {
   const [pawnFen, setPawnFen] = useState('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1');
@@ -103,13 +103,12 @@ export default function SharedBoard() {
 
 
   return (
-    <div>
-      <div className="py-2 flex flex-col sm:flex-row justify-around">
+    <div className="py-20 flex flex-col sm:flex-row justify-around items-center">
+      <div className="flex justify-center gap-5">
         <MainBoard game={game} makeMove={makeMove} width={WIDTH} />
         <PawnBoard fen={pawnFen} width={WIDTH} />
       </div>
-      <div className="text-center px-8 my-2">{movesDisplay}</div>
-      <Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moveBack={moveBack} moveForward={moveForward} />
+      <div className="flex-grow-0 flex-auto"><Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moves={movesDisplay} moveBack={moveBack} moveForward={moveForward} /></div>
     </div>
   );
 }
