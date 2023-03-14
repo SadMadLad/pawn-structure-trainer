@@ -12,7 +12,7 @@ export default function PawnBoard({ fen }) {
         <div>
           <Chessboard
             id='Pawnboard'
-            boardWidth={500}
+            boardWidth={450}
             position={fen}
             arePiecesDraggable={false}
             showBoardNotation={false}
