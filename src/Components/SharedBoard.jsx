@@ -106,9 +106,9 @@ export default function SharedBoard() {
     <div className="py-20 flex flex-col sm:flex-row justify-around items-center">
       <div className="flex justify-center gap-5">
         <MainBoard game={game} makeMove={makeMove} width={WIDTH} />
+        <div className="flex-grow-0 flex-auto"><Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moves={movesDisplay} moveBack={moveBack} moveForward={moveForward} /></div>
         <PawnBoard fen={pawnFen} width={WIDTH} />
       </div>
-      <div className="flex-grow-0 flex-auto"><Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moves={movesDisplay} moveBack={moveBack} moveForward={moveForward} /></div>
     </div>
   );
 }
