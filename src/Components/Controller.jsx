@@ -1,8 +1,12 @@
-export default function Controller({ popHistory, handlePgn, controls, moves, moveBack, moveForward }) {
+export default function Controller({ popHistory, handlePgn, controls, moves, moveBack, moveForward, resetHandler }) {
+  const completeReset = () => {
+    resetHandler();
+    document.getElementById('file-upload').value = '';
+  }
 
   return (
     <div className="bg-chess-darker h-full w-full text-white font-bold p-5 rounded">
-      <p className="overflow-auto h-40 bg-chess-dark m-3 p-3 rounded" style={{width: 250}}>
+      <p className="overflow-auto h-40 bg-chess-dark m-3 p-3 rounded flex flex-col-reverse" style={{width: 250}}>
         {moves}
       </p>
       <div className="flex flex-col items-center justify-center mt-5">
@@ -22,6 +26,7 @@ export default function Controller({ popHistory, handlePgn, controls, moves, mov
             </>
           }
         </div>
+        <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded" onClick={completeReset}>Reset Everything</button>
       </div>
     </div>
   )
