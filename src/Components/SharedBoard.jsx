@@ -11,6 +11,7 @@ export default function SharedBoard() {
   const [pawnFen, setPawnFen] = useState('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1')
   const [game, setGame] = useState(new Chess())
   const [movesDisplay, setMovesDisplay] = useState('')
+  const [boardOrientation, setBoardOrientation] = useState(true) // true => white, false => black
 
   // PGN related states
   const [counter, setCounter] = useState(0)
@@ -101,7 +102,9 @@ export default function SharedBoard() {
     updateBoard(false, false, 'back')
   }
 
-  // Reset State
+  /* Button Functions */
+
+  // Reset Everything
   const resetHandler = () => {
     setPawnFen('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1')
     setGame(new Chess())
@@ -111,13 +114,18 @@ export default function SharedBoard() {
     setControls(false)
   }
 
+  // Switch Board Orientation
+  const switchBoardOrientation = () => {
+    const newNotation = !boardOrientation;
+    setBoardOrientation(newNotation);
+  }
 
   return (
     <div className="py-20 flex flex-col sm:flex-row justify-around items-center">
       <div className="flex justify-center gap-5">
-        <MainBoard game={game} makeMove={makeMove} width={WIDTH} />
-        <div className="flex-grow-0 flex-auto"><Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moves={movesDisplay} moveBack={moveBack} moveForward={moveForward} resetHandler={resetHandler} /></div>
-        <PawnBoard fen={pawnFen} width={WIDTH} />
+        <MainBoard game={game} makeMove={makeMove} width={WIDTH} boardOrientation={boardOrientation} />
+        <div className="flex-grow-0 flex-auto"><Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moves={movesDisplay} moveBack={moveBack} moveForward={moveForward} resetHandler={resetHandler} switchBoardOrientation={switchBoardOrientation}/></div>
+        <PawnBoard fen={pawnFen} width={WIDTH} boardOrientation={boardOrientation} />
       </div>
     </div>
   );
