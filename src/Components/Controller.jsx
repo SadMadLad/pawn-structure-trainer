@@ -7,8 +7,8 @@ export default function Controller({ popHistory, handlePgn, controls, moves, mov
       </p>
       <div className="flex flex-col items-center justify-center mt-5">
         <div className="flex flex-row justify-center items-center gap-6 my-2">
-          <button className="bg-chess-green hover:bg-gray-700 text-white font-bold p-3 rounded" onClick={popHistory}>Undo Move</button>
-          <label htmlFor="file-upload" className="bg-chess-green hover:bg-gray-700 text-white font-bold p-3 rounded">
+          <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded" onClick={popHistory}>Undo Move</button>
+          <label htmlFor="file-upload" className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded">
             Upload PGN
           </label>
           <input className="hidden" id="file-upload" type="file" onChange={handlePgn} />
@@ -17,8 +17,8 @@ export default function Controller({ popHistory, handlePgn, controls, moves, mov
           {
             controls &&
             <>
-              <button className="bg-chess-green hover:bg-gray-700 text-white font-bold p-3 rounded" onClick={moveBack}>{'<'}</button>
-              <button className="bg-chess-green hover:bg-gray-700 text-white font-bold p-3 rounded" onClick={moveForward}>{'>'}</button>
+              <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded" onClick={moveBack}>{'<'}</button>
+              <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded" onClick={moveForward}>{'>'}</button>
             </>
           }
         </div>
