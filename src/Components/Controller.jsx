@@ -26,8 +26,8 @@ export default function Controller({ popHistory, handlePgn, controls, moves, mov
             </>
           }
         </div>
-        <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded" onClick={completeReset}>Reset Everything</button>
-        <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded my-3" onClick={switchBoardOrientation}>Switch Orientation</button>
+        <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded" onClick={completeReset}>Reset</button>
+        <button className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded my-3" onClick={switchBoardOrientation}>Switch</button>
       </div>
     </div>
   )
