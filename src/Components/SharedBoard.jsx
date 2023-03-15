@@ -3,6 +3,9 @@ import { Chess } from "chess.js";
 
 import MainBoard from "./MainBoard";
 import PawnBoard from "./PawnBoard";
+import Controller from "./Controller";
+
+const WIDTH = 400;
 
 export default function SharedBoard() {
   const [pawnFen, setPawnFen] = useState('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1');
@@ -98,41 +101,14 @@ export default function SharedBoard() {
     updateBoard(false, false, 'back')
   }
 
-  const buttonClass = "bg-gray-400 hover:bg-gray-700 text-white font-bold px-5 py-4 rounded mx-2"
 
   return (
-    <div>
-      <div className="py-2 flex flex-col sm:flex-row justify-around">
-        <div>
-          <MainBoard game={game} makeMove={makeMove} />
-
-        </div>
-        <div>
-          <PawnBoard fen={pawnFen} />
-        </div>
+    <div className="py-20 flex flex-col sm:flex-row justify-around items-center">
+      <div className="flex justify-center gap-5">
+        <MainBoard game={game} makeMove={makeMove} width={WIDTH} />
+        <PawnBoard fen={pawnFen} width={WIDTH} />
       </div>
-      <div className='grid grid-cols-12'>
-        <div className='col-span-1'></div>
-        <div className="col-span-4 flex justify-center items-center my-2">
-          <button className={buttonClass} onClick={popHistory}>Undo Move</button>
-          <label htmlFor="file-upload" className={buttonClass}>
-            Upload PGN
-          </label>
-          <input className="hidden" id="file-upload" type="file" onChange={handlePgn} />
-        </div>
-        <div className="col-span-2 flex justify-center items-center">
-          {
-            controls &&
-            <>
-              <button className={buttonClass} onClick={moveBack}>{'<'}</button>
-              <button className={buttonClass} onClick={moveForward}>{'>'}</button>
-            </>
-          }
-        </div>
-        <div className="col-span-4"></div>
-
-      </div>
-      <div className="text-center px-8 my-2">{movesDisplay}</div>
+      <div className="flex-grow-0 flex-auto"><Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moves={movesDisplay} moveBack={moveBack} moveForward={moveForward} /></div>
     </div>
   );
 }

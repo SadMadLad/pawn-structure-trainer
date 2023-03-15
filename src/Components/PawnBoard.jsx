@@ -3,22 +3,22 @@ import { Chessboard } from 'react-chessboard'
 import Horizontal from './Horizontal'
 import Vertical from './Vertical'
 
-export default function PawnBoard({ fen }) {
+export default function PawnBoard({ fen, width }) {
   return (
     <div>
       <Horizontal />
       <div className='flex'>
-        <Vertical />
+        <Vertical width={width} />
         <div>
           <Chessboard
             id='Pawnboard'
-            boardWidth={450}
+            boardWidth={width}
             position={fen}
             arePiecesDraggable={false}
             showBoardNotation={false}
           />
         </div>
-        <Vertical />
+        <Vertical width={width}/>
       </div>
       <Horizontal />
     </div>
