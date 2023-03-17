@@ -10,7 +10,7 @@ const WIDTH = 400
 export default function SharedBoard() {
   const [pawnFen, setPawnFen] = useState('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1')
   const [game, setGame] = useState(new Chess())
-  const [movesDisplay, setMovesDisplay] = useState('')
+  const [movesDisplay, setMovesDisplay] = useState([])
   const [boardOrientation, setBoardOrientation] = useState(true) // true => white, false => black
 
   // PGN related states
@@ -58,7 +58,11 @@ export default function SharedBoard() {
 
     setGame(gameCopy)
     setPawnFen(pawnPositions)
-    setMovesDisplay(gameCopy.pgn())
+
+    const moves = gameCopy.pgn()
+    const splittedMoves = moves.split(/\d+\./).slice(1);
+    const withIndex = splittedMoves.map((move, index) => `${index + 1}.${move}`)
+    setMovesDisplay(withIndex)
   }
 
   // Board State Methods
