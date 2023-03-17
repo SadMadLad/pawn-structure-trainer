@@ -112,7 +112,7 @@ export default function SharedBoard() {
   const resetHandler = () => {
     setPawnFen('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1')
     setGame(new Chess())
-    setMovesDisplay('')
+    setMovesDisplay([])
     setCounter(0)
     setPgnMoves([])
     setControls(false)
