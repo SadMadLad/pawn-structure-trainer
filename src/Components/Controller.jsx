@@ -12,7 +12,7 @@ export default function Controller({ moves }) {
 
 
   return (
-    <div className="bg-chess-darker border-red-500 border-4 h-full w-full text-white font-bold p-5 rounded">
+    <div className="mt-6 bg-chess-darker border-red-500 border-4 h-full w-full text-white font-bold p-5 rounded">
       <p className="overflow-auto bg-chess-dark rounded flex flex-col h-full" style={{ width: 250, height: 400 }}>
         {moves.map((move, index) => <span className="text-center" key={index}>{move}</span>)}
         <span ref={movesEndRef}></span>

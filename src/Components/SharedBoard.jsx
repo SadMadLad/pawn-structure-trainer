@@ -131,55 +131,28 @@ export default function SharedBoard() {
     setBoardOrientation(newNotation);
   }
 
-  const whiteInput = () => <input className="text-center bg-gray-500 p-2 rounded text-white"/>
-  const blackInput = () => <input className="text-center bg-gray-500 p-2 rounded text-white"/>
-
-
   return (
-    <>
-      <div className="grid grid-cols-12 mt-4">
-        <div className="col-span-5"></div>
-        <div className="col-span-2"></div>
-        <div className="flex justify-center items-center pb-4 col-span-5">
-          { boardOrientation ? blackInput() : whiteInput() }
-        </div>
-      </div>
-      <div className="flex flex-col sm:flex-row justify-around items-center">
-        <div className="flex justify-center gap-5">
-          <MainBoard game={game} makeMove={makeMove} width={WIDTH} boardOrientation={boardOrientation} />
-          <div className="flex-grow-0 flex-auto"><Controller popHistory={popHistory} handlePgn={handlePgn} controls={controls} moves={movesDisplay} moveBack={moveBack} moveForward={moveForward} resetHandler={resetHandler} switchBoardOrientation={switchBoardOrientation} /></div>
-          <PawnBoard fen={pawnFen} width={WIDTH} boardOrientation={boardOrientation} />
-        </div>
-      </div>
-      <div className="grid grid-cols-12 mt-6">
-        <div className="col-span-5 flex justify-center items-center gap-2">
-          {
-            controls &&
-            <>
-              <Button method={moveBack} content={'<'}/>
-              <Button method={moveForward} content={'>'}/>
-            </>
-          }
-        </div>
-
-        <div className="col-span-2 flex flex-col justify-center items-center gap-1">
-          <div className="flex gap-2">
-            <Button method={switchBoardOrientation} content={'Switch'}/>
-            <Button method={popHistory} content={'Undo Move'}/>
+    <div className="flex flex-col sm:flex-row justify-around items-center mt-10">
+      <div className="flex justify-center gap-5">
+        <MainBoard game={game} makeMove={makeMove} width={WIDTH} boardOrientation={boardOrientation} controls={controls} moveBack={moveBack} moveForward={moveForward} />
+        <div className="flex-grow-0 flex-auto h-5/6">
+          <Controller moves={movesDisplay} />
+          <div className="mt-4 flex flex-col items-center gap-2">
+            <div className="flex gap-2">
+              <Button method={switchBoardOrientation} content={'Switch'} />
+              <Button method={popHistory} content={'Undo Move'} />
+            </div>
+            <div className="flex gap-2">
+              <label htmlFor="file-upload" className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded">
+                Upload PGN
+              </label>
+              <input className="hidden" id="file-upload" type="file" onChange={handlePgn} />
+              <Button method={completeReset} content={'Reset'} />
+            </div>
           </div>
-          <div className="flex gap-2">
-            <label htmlFor="file-upload" className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded">
-              Upload PGN
-            </label>
-            <input className="hidden" id="file-upload" type="file" onChange={handlePgn} />
-            <Button method={completeReset} content={'Reset'} />
-          </div>
-
         </div>
-        <div className="flex justify-center items-start col-span-5">
-          { boardOrientation ? whiteInput() : blackInput() }
-        </div>
+        <PawnBoard fen={pawnFen} width={WIDTH} boardOrientation={boardOrientation} />
       </div>
-    </>
+    </div>
   );
 }
