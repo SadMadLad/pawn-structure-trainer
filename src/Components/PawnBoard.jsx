@@ -7,7 +7,7 @@ export default function PawnBoard({ fen, width, boardOrientation }) {
   return (
     <div>
       <div className='flex justify-center mb-4'>
-        <input type="text" className='bg-slate-600 rounded-md text-center text-white font-semibold p-2' />
+        <input type="text" className='mx-6 bg-slate-600 rounded-md text-center text-white font-semibold p-2 w-full' />
       </div>
       <Horizontal orientation={boardOrientation} />
       <div className='flex'>
@@ -26,7 +26,7 @@ export default function PawnBoard({ fen, width, boardOrientation }) {
       </div>
       <Horizontal orientation={boardOrientation} />
       <div className='flex justify-center mt-4'>
-        <input type="text" className='bg-slate-600 rounded-md text-center text-white font-semibold p-2' />
+        <input type="text" className='mx-6 bg-slate-600 rounded-md text-center text-white font-semibold p-2 w-full' />
       </div>
     </div>
   )

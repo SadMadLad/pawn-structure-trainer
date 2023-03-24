@@ -96,13 +96,16 @@ export default function SharedBoard() {
 
       setControls(true)
       setPgnMoves(pgnGame.history())
-      setGameName(`${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0,4)}`)
+      setGameName(`${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0, 4)}`)
       updateBoard(false, false, false, true)
     }
   }
 
   const moveForward = () => updateBoard(false, false, 'forward')
-  const moveBack = () => updateBoard(false, false, 'back')
+  const moveBack = () => {
+    if(controls) { updateBoard(false, false, 'back') }
+    else { popHistory() } 
+  }
 
   /* Button Functions */
 
@@ -135,11 +138,8 @@ export default function SharedBoard() {
         <div className="flex-grow-0 flex-auto h-5/6">
           <Controller moves={movesDisplay} />
           <div className="mt-4 flex flex-col items-center gap-2">
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-8">
               <Button method={switchBoardOrientation} content={'Switch'} />
-              <Button method={popHistory} content={'Undo Move'} />
-            </div>
-            <div className="flex gap-2">
               <label htmlFor="file-upload" className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded">
                 Upload PGN
               </label>
