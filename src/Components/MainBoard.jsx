@@ -4,9 +4,12 @@ import Horizontal from './Horizontal'
 import Vertical from './Vertical'
 import Button from './Button'
 
-export default function MainBoard({ makeMove, game, width, boardOrientation, controls, moveBack, moveForward }) {
+export default function MainBoard({ makeMove, game, width, boardOrientation, controls, moveBack, moveForward, gameName }) {
   return (
-    <div className='mt-12'>
+    <div>
+      <div className="flex justify-center items-center mb-4">
+        <input type="text" className='bg-slate-600 rounded-md text-center text-white font-semibold p-2' />
+      </div>
       <Horizontal orientation={boardOrientation} />
       <div className='flex'>
         <Vertical width={width} orientation={boardOrientation} />
