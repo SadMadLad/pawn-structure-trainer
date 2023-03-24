@@ -8,7 +8,7 @@ export default function MainBoard({ makeMove, game, width, boardOrientation, con
   return (
     <div>
       <div className="flex justify-center items-center mb-4">
-        <input type="text" className='bg-slate-600 rounded-md text-center text-white font-semibold p-2' />
+        <input type="text" className='mx-4 bg-slate-600 rounded-md text-center text-white font-semibold p-2 w-full' />
       </div>
       <Horizontal orientation={boardOrientation} />
       <div className='flex'>
