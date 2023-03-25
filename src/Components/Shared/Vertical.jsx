@@ -1,3 +1,5 @@
+/* The vertical label from 1 to 8 on the Chessboard */
+
 export default function Vertical({ height, orientation }) {
   const numbers = [8, 7, 6, 5, 4, 3, 2, 1];
 

@@ -1,7 +1,8 @@
-import Home from "./Pages/Home"
+import HomePage from "./Pages/HomePage"
+import LoginPage from "./Pages/LoginPage"
 
 export default function App() {
   return (
-    <Home />
+    <LoginPage />
   )
 }

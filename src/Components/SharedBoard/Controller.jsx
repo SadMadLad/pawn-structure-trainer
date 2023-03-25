@@ -1,3 +1,5 @@
+/* The panel in the center to display the moves of the game */
+
 import { useEffect, useRef } from 'react';
 
 export default function Controller({ moves }) {

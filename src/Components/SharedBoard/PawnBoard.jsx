@@ -1,7 +1,9 @@
+/* Pawn-only board */
+
 import { Chessboard } from 'react-chessboard'
 
-import Horizontal from './Horizontal'
-import Vertical from './Vertical'
+import Horizontal from '../Shared/Horizontal'
+import Vertical from '../Shared/Vertical'
 
 export default function PawnBoard({ fen, width, boardOrientation }) {
   return (

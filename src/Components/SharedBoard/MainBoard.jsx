@@ -1,8 +1,10 @@
+/* Main chessboard, where the original game is being played */
+
 import { Chessboard } from 'react-chessboard'
 
-import Horizontal from './Horizontal'
-import Vertical from './Vertical'
-import Button from './Button'
+import Horizontal from '../Shared/Horizontal'
+import Vertical from '../Shared/Vertical'
+import Button from '../Shared/Button'
 
 export default function MainBoard({ makeMove, game, width, boardOrientation, controls, moveBack, moveForward, gameName }) {
   return (

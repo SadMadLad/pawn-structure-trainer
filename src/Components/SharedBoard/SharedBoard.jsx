@@ -1,12 +1,15 @@
+/* The MainBoard and SharedBoard compiled */
+
 import { useState } from "react";
 import { Chess } from "chess.js";
 
 import MainBoard from "./MainBoard";
 import PawnBoard from "./PawnBoard";
 import Controller from "./Controller";
-import Button from './Button'
+import Button from '../Shared/Button';
 
-const WIDTH = 400
+const WIDTH = 400;
+const fileReader = new FileReader();
 
 export default function SharedBoard() {
   const [pawnFen, setPawnFen] = useState('8/pppppppp/8/8/8/8/PPPPPPPP/8 w - - 1 1')
@@ -83,8 +86,9 @@ export default function SharedBoard() {
 
   // PGN file controls
   const handlePgn = (e) => {
-    const fileReader = new FileReader();
+    resetHandler()
     const pgn = e.target.files[0];
+    console.log(e.target.files)
 
     fileReader.readAsText(pgn, 'UTF-8')
     fileReader.onload = function (evt) {
@@ -93,18 +97,20 @@ export default function SharedBoard() {
       const pgnGame = new Chess()
       pgnGame.loadPgn(evt.target.result)
       const gameHeader = pgnGame.header()
+      const newGame = pgnGame.history()
 
       setControls(true)
-      setPgnMoves(pgnGame.history())
+      setPgnMoves(newGame)
       setGameName(`${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0, 4)}`)
       updateBoard(false, false, false, true)
     }
+    document.getElementById('file-upload').value = '';
   }
 
   const moveForward = () => updateBoard(false, false, 'forward')
   const moveBack = () => {
-    if(controls) { updateBoard(false, false, 'back') }
-    else { popHistory() } 
+    if (controls) { updateBoard(false, false, 'back') }
+    else { popHistory() }
   }
 
   /* Button Functions */
