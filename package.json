@@ -6,6 +6,7 @@
   "homepage": "https://sadmadlad.github.io/pawn-structure-trainer/",
   "scripts": {
     "dev": "vite",
+    "host": "vite --host",
     "build": "vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
@@ -23,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-redux": "^8.0.5",
+    "react-router-dom": "^6.9.0",
     "redux-persist": "^6.0.0",
     "yup": "^1.0.2"
   },
