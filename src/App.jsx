@@ -1,12 +1,12 @@
 import HomePage from "./Pages/HomePage"
 import LoginPage from "./Pages/LoginPage"
-import RegisterPage from "./Pages/SignUpPage"
+import RegisterPage from "./Pages/RegisterPage"
 
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 export default function App() {
-  const isAuthenticated = true && useSelector(state => state.token);
+  const isAuthenticated = useSelector(state => state.token);
 
   return (
     <div className="app">

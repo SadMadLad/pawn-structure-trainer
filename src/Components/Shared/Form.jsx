@@ -40,7 +40,7 @@ export default function Form({ pageType }) {
   const routeButton = (path, text) => {
     const routeToPath = () => { navigate(path); };
 
-    return <button type="button" onClick={routeToPath}>{text}</button>
+    return <button className="underline text-green-800 mt-3" type="button" onClick={routeToPath}>{text}</button>
   };
 
   const register = async (values, onSubmitProps) => {
@@ -83,11 +83,12 @@ export default function Form({ pageType }) {
           token: loggedIn.token,
         })
       );
-      navigate("/home");
       onSubmitProps.resetForm();
+      setError('');
+      navigate("/home");
     }
     else {
-      setError(loggedInResponse.error);
+      setError(loggedIn.msg);
     }
   };
 
@@ -105,32 +106,38 @@ export default function Form({ pageType }) {
         handleChange,
         handleSubmit,
       }) => (
-        <form className="bg-orange-500" onSubmit={handleSubmit}>
+        <form className="m-4 bg-chess-green border border-black rounded-lg p-5" onSubmit={handleSubmit}>
           {isRegister &&
-            <div>
-              <label htmlFor="name">Name</label>
-              <input value={values.name} name="name" placeholder="Your Name" onBlur={handleBlur} onChange={handleChange} />
-              <div>{touched.name && errors.name}</div>
+            <div className="flex h-14 justify-between">
+              <label className="font-bold mr-5" htmlFor="name">Name: </label>
+              <div>
+                <input className="w-full py-1 px-2 rounded-lg" value={values.name} name="name" placeholder="Your Name" onBlur={handleBlur} onChange={handleChange} />
+                <div className="text-xs text-red-700">{touched.name && errors.name}</div>
+              </div>
             </div>
           }
 
-          <div>
-            <label htmlFor="email">Email</label>
-            <input value={values.email} type="email" name="email" placeholder="Your Email" onBlur={handleBlur} onChange={handleChange} />
-            <div>{touched.email && errors.email}</div>
+          <div className="flex h-14 justify-between">
+            <label className="font-bold mr-5" htmlFor="email">Email: </label>
+            <div>
+              <input className="w-full py-1 px-2 rounded-lg" value={values.email} type="email" name="email" placeholder="Your Email" onBlur={handleBlur} onChange={handleChange} />
+              <div className="text-xs text-red-700">{touched.email && errors.email}</div>
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="password">Password</label>
-            <input value={values.password} type="password" name="password" onBlur={handleBlur} onChange={handleChange} />
-            <div>{touched.password && errors.password}</div>
+          <div className="flex h-14 justify-between">
+            <label className="font-bold mr-5" htmlFor="password">Password: </label>
+            <div>
+              <input className="w-full py-1 px-2 rounded-lg" value={values.password} type="password" name="password" onBlur={handleBlur} onChange={handleChange} />
+              <div className="text-xs text-red-700">{touched.password && errors.password}</div>
+            </div>
           </div>
 
-          <button type="submit">
-            {isLogin ? 'Login' : 'Register'}
-          </button>
+          <div className="w-full text-center">
+            <button className="font-bold text-white shadow px-3 py-2 rounded-lg bg-slate-700" type="submit">{isLogin ? 'Login' : 'Register'}</button>
+          </div>
 
-          <p>{error}</p>
+          <p className='text-center text-red-600 text-md mt-3'>{error}</p>
           {isLogin ? <div>Don't have an account? {routeButton('/register', 'Sign Up!')}</div> : <div>Already have an account? {routeButton('/', 'Login')}</div>}
         </form>
       )}
