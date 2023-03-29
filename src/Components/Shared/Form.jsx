@@ -46,7 +46,7 @@ export default function Form({ pageType }) {
   const register = async (values, onSubmitProps) => {
 
     const savedUserResponse = await fetch(
-      'http://localhost:3001/auth/register',
+      'https://outstanding-fish-wear.cyclic.app/auth/register',
       {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -70,7 +70,7 @@ export default function Form({ pageType }) {
   }
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+    const loggedInResponse = await fetch("https://outstanding-fish-wear.cyclic.app/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
