@@ -138,7 +138,7 @@ export default function SharedBoard() {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row justify-around items-center mt-10">
+    <div className="flex flex-col sm:flex-row justify-around items-center mt-5">
       <div className="flex justify-center gap-5">
         <MainBoard game={game} makeMove={makeMove} width={WIDTH} boardOrientation={boardOrientation} controls={controls} moveBack={moveBack} moveForward={moveForward} gameName={gameName} />
         <div className="flex-grow-0 flex-auto h-5/6">
