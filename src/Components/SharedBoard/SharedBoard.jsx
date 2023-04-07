@@ -93,9 +93,13 @@ export default function SharedBoard() {
     fileReader.readAsText(pgn, 'UTF-8')
     fileReader.onload = function (evt) {
       setControls(true)
+      let chessFile = evt.target.result;
+      let kingCastlesReplaced = chessFile.replaceAll('0-0', 'O-O');
+      let queenCastlesReplaced = kingCastlesReplaced.replaceAll('0-0-0', 'O-O-O')
 
+      console.log(queenCastlesReplaced)
       const pgnGame = new Chess()
-      pgnGame.loadPgn(evt.target.result)
+      pgnGame.loadPgn(queenCastlesReplaced)
       const gameHeader = pgnGame.header()
       const newGame = pgnGame.history()
 
