@@ -1,22 +1,19 @@
-import HomePage from "./Pages/HomePage"
-import LoginPage from "./Pages/LoginPage"
-import RegisterPage from "./Pages/RegisterPage"
+import HomePage from "./Pages/HomePage";
 
-import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
-  const isAuthenticated = useSelector(state => state.token);
-
   return (
     <div className="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <LoginPage />} />
-          <Route path="/register" element={isAuthenticated ? <Navigate to="/home" /> : <RegisterPage />} />
-          <Route path="/home" element={isAuthenticated ? <HomePage /> : <Navigate to="/" />} />
+          <Route path="/" element={<HomePage />} />
         </Routes>
+        <div className="w-screen fixed top-12 left-1/2 right-1/2">
+          <ToastContainer />
+        </div>
       </BrowserRouter>
     </div>
-  )
+  );
 }
