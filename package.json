@@ -10,7 +10,8 @@
     "build": "vite build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pretty": "npx prettier . --write"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",

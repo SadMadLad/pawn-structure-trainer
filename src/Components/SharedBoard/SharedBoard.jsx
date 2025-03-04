@@ -20,6 +20,7 @@ export default function SharedBoard() {
   const [movesDisplay, setMovesDisplay] = useState([]);
   const [boardOrientation, setBoardOrientation] = useState(true); // true => white, false => black
   const [freeMode, setFreeMode] = useState(false);
+  const [invertMode, setInvertMode] = useState(false);
 
   // PGN related states
   const [counter, setCounter] = useState(0);
@@ -46,7 +47,7 @@ export default function SharedBoard() {
 
   useEffect(() => {
     resetHandler();
-  }, [freeMode])
+  }, [freeMode]);
 
   const updateBoard = (
     move = false,
@@ -62,9 +63,12 @@ export default function SharedBoard() {
         const pieceToMove = gameCopy.get(move.from);
         const pieceAtSquare = gameCopy.get(move.to);
 
-        if (pieceAtSquare.type !== 'k') {
+        if (pieceAtSquare.type !== "k") {
           gameCopy.remove(move.from);
-          gameCopy.put({ type: pieceToMove.type, color: pieceToMove.color }, move.to);
+          gameCopy.put(
+            { type: pieceToMove.type, color: pieceToMove.color },
+            move.to,
+          );
         }
       } else {
         gameCopy.move(move);
@@ -74,10 +78,10 @@ export default function SharedBoard() {
 
     if (pgn) {
       if (pgn === "forward" && counter < pgnMoves.length) {
-        setCounter(counter => counter + 1);
+        setCounter((counter) => counter + 1);
         updateBoard(pgnMoves[counter], false, false);
       } else if (pgn === "back" && counter > 0) {
-        setCounter(counter => counter - 1);
+        setCounter((counter) => counter - 1);
         updateBoard(false, true, false);
       }
 
@@ -104,7 +108,7 @@ export default function SharedBoard() {
       updateBoard(move);
     } catch (err) {
       console.log(err);
-      toast("Invalid Move")
+      toast("Invalid Move");
       console.log("Invalid Move");
     }
   };
@@ -201,20 +205,44 @@ export default function SharedBoard() {
             </div>
             <div className="flex flex-wrap gap-2">
               <button
-                className={`${freeMode ? 'bg-green-600 hover:bg-green-800' : 'bg-gray-700 hover:bg-gray-900'} text-white font-bold p-3 rounded`}
-                onClick={() => setFreeMode(mode => !mode)}
+                className={`${freeMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} text-white font-bold p-3 rounded`}
+                onClick={() => setFreeMode((mode) => !mode)}
               >
-                Free Mode: {freeMode ? 'ON' : 'OFF'}
+                Free Mode: {freeMode ? "ON" : "OFF"}
               </button>
-              <Button method={() => setBoardOrientation(notation => !notation)} content={"Flip Board"} />
+              <Button
+                method={() => setBoardOrientation((notation) => !notation)}
+                content={"Flip Board"}
+              />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                className={`${invertMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} text-white font-bold p-3 rounded`}
+                onClick={() => setInvertMode((mode) => !mode)}
+              >
+                Invert Mode: {invertMode ? "ON" : "OFF"}
+              </button>
             </div>
           </div>
         </div>
-        <PawnBoard
-          fen={pawnFen}
-          width={WIDTH}
-          boardOrientation={boardOrientation}
-        />
+        {invertMode ? (
+          <MainBoard
+            game={game}
+            makeMove={makeMove}
+            width={WIDTH}
+            boardOrientation={!boardOrientation}
+            controls={controls}
+            moveBack={moveBack}
+            moveForward={moveForward}
+            gameName={gameName}
+          />
+        ) : (
+          <PawnBoard
+            fen={pawnFen}
+            width={WIDTH}
+            boardOrientation={boardOrientation}
+          />
+        )}
       </div>
     </div>
   );
