@@ -8,7 +8,7 @@ import Vertical from "../Shared/Vertical";
 import Button from "@/Components/Shared/Button";
 
 export default function PawnBoard({ fen, width }) {
-  const [boardOrientation, setBoardOrientation] = useState(false);
+  const [boardOrientation, setBoardOrientation] = useState(true);
 
   return (
     <div>
