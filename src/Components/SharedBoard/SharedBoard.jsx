@@ -18,9 +18,9 @@ export default function SharedBoard() {
   );
   const [game, setGame] = useState(new Chess());
   const [movesDisplay, setMovesDisplay] = useState([]);
-  const [boardOrientation, setBoardOrientation] = useState(true); // true => white, false => black
   const [freeMode, setFreeMode] = useState(false);
   const [invertMode, setInvertMode] = useState(false);
+  const [pawnOnlyMode, setPawnOnlyMode] = useState(true);
 
   // PGN related states
   const [counter, setCounter] = useState(0);
@@ -107,9 +107,7 @@ export default function SharedBoard() {
     try {
       updateBoard(move);
     } catch (err) {
-      console.log(err);
-      toast("Invalid Move");
-      console.log("Invalid Move");
+      toast.error("Invalid Moves", { theme: "colored" });
     }
   };
 
@@ -122,28 +120,51 @@ export default function SharedBoard() {
 
     fileReader.readAsText(pgn, "UTF-8");
     fileReader.onload = function (evt) {
-      setControls(true);
-      let chessFile = evt.target.result;
-      let kingCastlesReplaced = chessFile.replaceAll("0-0", "O-O");
-      let queenCastlesReplaced = kingCastlesReplaced.replaceAll(
-        "0-0-0",
-        "O-O-O",
-      );
+      try {
+        setControls(true);
+        let chessFile = evt.target.result;
+        let kingCastlesReplaced = chessFile.replaceAll("0-0", "O-O");
+        let queenCastlesReplaced = kingCastlesReplaced.replaceAll(
+          "0-0-0",
+          "O-O-O",
+        );
 
-      const pgnGame = new Chess();
-      pgnGame.loadPgn(queenCastlesReplaced);
+        const pgnGame = new Chess();
+        pgnGame.loadPgn(queenCastlesReplaced);
 
-      const gameHeader = pgnGame.header();
-      const newGame = pgnGame.history();
+        const gameHeader = pgnGame.header();
+        const newGame = pgnGame.history();
 
-      setControls(true);
-      setPgnMoves(newGame);
-      setGameName(
-        `${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0, 4)}`,
-      );
-      updateBoard(false, false, false, true);
+        setControls(true);
+        setPgnMoves(newGame);
+        setGameName(
+          `${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0, 4)}`,
+        );
+        updateBoard(false, false, false, true);
+        toast.success("PGN Uploaded Successfully!", { theme: "colored" });
+      } catch {
+        toast.error("Could not upload PGN", { theme: "colored" });
+      }
     };
     document.getElementById("file-upload").value = "";
+  };
+
+  const exportPgn = () => {
+    const pgn = game.pgn();
+    if (pgn.trim() === "" || pgn === null || pgn === undefined) {
+      toast.error("Can't export, the PGN is blank.", { theme: "colored" });
+      return;
+    }
+
+    const blob = new Blob([pgn], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "game.pgn";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const moveForward = () => updateBoard(false, false, "forward");
@@ -179,11 +200,11 @@ export default function SharedBoard() {
           game={game}
           makeMove={makeMove}
           width={WIDTH}
-          boardOrientation={boardOrientation}
           controls={controls}
           moveBack={moveBack}
           moveForward={moveForward}
           gameName={gameName}
+          boardOrientation={true}
         />
         <div className="flex-grow-0 flex-auto h-5/6">
           <Controller moves={movesDisplay} />
@@ -210,37 +231,37 @@ export default function SharedBoard() {
               >
                 Free Mode: {freeMode ? "ON" : "OFF"}
               </button>
-              <Button
-                method={() => setBoardOrientation((notation) => !notation)}
-                content={"Flip Board"}
-              />
             </div>
             <div className="flex flex-wrap gap-2">
               <button
-                className={`${invertMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} text-white font-bold p-3 rounded`}
-                onClick={() => setInvertMode((mode) => !mode)}
+                className={`${pawnOnlyMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} text-white font-bold p-3 rounded`}
+                onClick={() => setPawnOnlyMode((mode) => !mode)}
               >
-                Invert Mode: {invertMode ? "ON" : "OFF"}
+                Pawn Only: {pawnOnlyMode ? "ON" : "OFF"}
               </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button method={exportPgn} content={"Export PGN"} />
             </div>
           </div>
         </div>
-        {invertMode ? (
+        {pawnOnlyMode && (
+          <PawnBoard
+            fen={pawnFen}
+            width={WIDTH}
+            boardOrientation={invertMode}
+          />
+        )}
+        {!pawnOnlyMode && (
           <MainBoard
             game={game}
             makeMove={makeMove}
             width={WIDTH}
-            boardOrientation={!boardOrientation}
+            boardOrientation={invertMode}
             controls={controls}
             moveBack={moveBack}
             moveForward={moveForward}
             gameName={gameName}
-          />
-        ) : (
-          <PawnBoard
-            fen={pawnFen}
-            width={WIDTH}
-            boardOrientation={boardOrientation}
           />
         )}
       </div>

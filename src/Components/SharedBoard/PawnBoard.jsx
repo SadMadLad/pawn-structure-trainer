@@ -1,11 +1,15 @@
 /* Pawn-only board */
 
+import { useState } from "react";
 import { Chessboard } from "react-chessboard";
 
 import Horizontal from "../Shared/Horizontal";
 import Vertical from "../Shared/Vertical";
+import Button from "@/Components/Shared/Button";
 
-export default function PawnBoard({ fen, width, boardOrientation }) {
+export default function PawnBoard({ fen, width }) {
+  const [boardOrientation, setBoardOrientation] = useState(false);
+
   return (
     <div>
       <div className="flex justify-center mb-4">
@@ -34,6 +38,13 @@ export default function PawnBoard({ fen, width, boardOrientation }) {
         <input
           type="text"
           className="mx-6 bg-slate-600 rounded-md text-center text-white font-semibold p-2 w-full"
+        />
+      </div>
+
+      <div className="flex items-center justify-center my-2.5">
+        <Button
+          method={() => setBoardOrientation((orientation) => !orientation)}
+          content={"Flip Board"}
         />
       </div>
     </div>

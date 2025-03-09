@@ -1,5 +1,7 @@
 /* Main chessboard, where the original game is being played */
 
+import { useState } from "react";
+
 import { Chessboard } from "react-chessboard";
 
 import Horizontal from "../Shared/Horizontal";
@@ -10,10 +12,11 @@ export default function MainBoard({
   makeMove,
   game,
   width,
-  boardOrientation,
   moveBack,
   moveForward,
 }) {
+  const [boardOrientation, setBoardOrientation] = useState(true);
+
   return (
     <div>
       <div className="flex justify-center items-center mb-4">
@@ -41,6 +44,13 @@ export default function MainBoard({
       <div className="mt-4 flex justify-center gap-2">
         <Button content={"<"} method={moveBack} />
         <Button content={">"} method={moveForward} />
+      </div>
+
+      <div className="flex items-center justify-center my-2.5">
+        <Button
+          method={() => setBoardOrientation((orientation) => !orientation)}
+          content={"Flip Board"}
+        />
       </div>
     </div>
   );
