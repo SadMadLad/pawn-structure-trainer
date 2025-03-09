@@ -137,12 +137,13 @@ export default function SharedBoard() {
 
         setControls(true);
         setPgnMoves(newGame);
-        setGameName(
-          `${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0, 4)}`,
-        );
+        // setGameName(
+        //   `${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0, 4)}`,
+        // );
         updateBoard(false, false, false, true);
         toast.success("PGN Uploaded Successfully!", { theme: "colored" });
-      } catch {
+      } catch (e) {
+        console.log(e)
         toast.error("Could not upload PGN", { theme: "colored" });
       }
     };
