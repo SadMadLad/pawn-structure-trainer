@@ -132,7 +132,7 @@ export default function SharedBoard() {
         const pgnGame = new Chess();
         pgnGame.loadPgn(queenCastlesReplaced);
 
-        const gameHeader = pgnGame.header();
+        // const gameHeader = pgnGame.header();
         const newGame = pgnGame.history();
 
         setControls(true);
@@ -141,10 +141,10 @@ export default function SharedBoard() {
         //   `${gameHeader.White} - ${gameHeader.Black}: ${gameHeader.Date.substring(0, 4)}`,
         // );
         updateBoard(false, false, false, true);
-        toast.success("PGN Uploaded Successfully!", { theme: "colored" });
+        toast.success("PGN Imported Successfully!", { theme: "colored" });
       } catch (e) {
         console.log(e)
-        toast.error("Could not upload PGN", { theme: "colored" });
+        toast.error("Could not import PGN", { theme: "colored" });
       }
     };
     document.getElementById("file-upload").value = "";
@@ -161,7 +161,7 @@ export default function SharedBoard() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "game.pgn";
+    a.download = new Date().toISOString();
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -215,7 +215,7 @@ export default function SharedBoard() {
                 htmlFor="file-upload"
                 className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded"
               >
-                Upload PGN
+                Import PGN
               </label>
               <input
                 className="hidden"
