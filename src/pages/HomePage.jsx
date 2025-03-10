@@ -1,4 +1,4 @@
-import SharedBoard from "../Components/SharedBoard/SharedBoard";
+import SharedBoard from "@/components/shared_board/SharedBoard";
 
 export default function HomePage() {
   return (

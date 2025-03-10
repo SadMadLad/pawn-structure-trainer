@@ -1,4 +1,4 @@
-import HomePage from "./Pages/HomePage";
+import HomePage from "@/pages/HomePage";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";

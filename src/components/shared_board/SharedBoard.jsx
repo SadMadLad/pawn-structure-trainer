@@ -1,13 +1,13 @@
 /* The MainBoard and SharedBoard compiled */
 
-import { useState, useEffect } from "react";
-import { Chess } from "chess.js";
-
-import MainBoard from "./MainBoard";
-import PawnBoard from "./PawnBoard";
-import Controller from "./Controller";
-import Button from "../Shared/Button";
 import { toast } from "react-toastify";
+import { Chess } from "chess.js";
+import { useState, useEffect } from "react";
+
+import MainBoard from "@/components/shared_board/MainBoard";
+import PawnBoard from "@/components/shared_board/PawnBoard";
+import Controller from "@/components/shared_board/Controller";
+import Button from "@/components/shared/Button";
 
 const WIDTH = 400;
 const fileReader = new FileReader();
@@ -143,7 +143,7 @@ export default function SharedBoard() {
         updateBoard(false, false, false, true);
         toast.success("PGN Imported Successfully!", { theme: "colored" });
       } catch (e) {
-        console.log(e)
+        console.log(e);
         toast.error("Could not import PGN", { theme: "colored" });
       }
     };
