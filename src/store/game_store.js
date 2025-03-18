@@ -56,7 +56,7 @@ const useGameStore = create((set, get) => ({
       });
       get().pawnPositions();
     } catch {
-      toast.error("Could Not Import PGN!", { theme: "colored" })
+      toast.error("Could Not Import PGN!", { theme: "colored" });
     }
   },
 
