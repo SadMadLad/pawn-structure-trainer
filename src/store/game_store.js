@@ -81,7 +81,7 @@ const useGameStore = create((set, get) => ({
   },
 
   // Reset the board
-  resetGame: () =>
+  reset: () =>
     set({
       game: new Chess(),
       gameFen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",

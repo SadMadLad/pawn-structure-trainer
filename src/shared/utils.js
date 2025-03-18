@@ -10,11 +10,11 @@ function downloadFile(text, fileName = new Date().toISOString()) {
   URL.revokeObjectURL(url);
 }
 
-function readFile(file, callback = () => {}) {
+function readUploadedFile(file, callback = () => {}) {
   const fileReader = new FileReader();
 
   fileReader.readAsText(file, "UTF-8");
   fileReader.onload = callback;
 }
 
-export { downloadFile, readFile };
+export { downloadFile, readUploadedFile };
