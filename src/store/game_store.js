@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { Chess } from "chess.js";
+import { toast } from "react-toastify";
 
 const useGameStore = create((set, get) => ({
   // The whole chess game
@@ -10,6 +11,9 @@ const useGameStore = create((set, get) => ({
 
   // Pawn Fen Positions
   pawnFen: "8/pppppppp/8/8/8/8/PPPPPPPP/8",
+
+  // Is currently a PGN file being used
+  isPgnMode: false,
 
   // Game Moves
   gameHistory: [],
@@ -22,6 +26,38 @@ const useGameStore = create((set, get) => ({
       set({ gameFen: get().game.fen() });
       get().pawnPositions();
     }
+
+    if (get().isPgnMode) {
+      const historyCopy = get().gameHistory;
+      historyCopy.pop();
+
+      set({ gameHistory: historyCopy });
+    }
+  },
+
+  // Handle PGN Upload
+  handlePgn: (pgnFileData) => {
+    try {
+      const newGame = new Chess();
+
+      let kingCastlesReplaced = pgnFileData.replaceAll("0-0", "O-O");
+      let queenCastlesReplaced = kingCastlesReplaced.replaceAll(
+        "0-0-0",
+        "O-O-O",
+      );
+
+      newGame.loadPgn(queenCastlesReplaced);
+
+      set({
+        game: newGame,
+        gameFen: newGame.fen(),
+        gameHistory: newGame.history(),
+        isPgnMode: true,
+      });
+      get().pawnPositions();
+    } catch {
+      toast.error("Could Not Import PGN!", { theme: "colored" })
+    }
   },
 
   // Get the fen positions of the pawn
@@ -29,9 +65,7 @@ const useGameStore = create((set, get) => ({
     const fen = get().game.fen();
 
     const parts = fen.split(" ");
-    if (parts.length < 1) {
-      return null;
-    }
+    if (parts.length < 1) return null;
 
     const boardRows = parts[0].split("/");
     const pawnRows = [];
@@ -77,6 +111,13 @@ const useGameStore = create((set, get) => ({
     set({ gameFen: get().game.fen() });
     get().pawnPositions();
 
+    if (get().isPgnMode) {
+      const historyCopy = get().gameHistory;
+      historyCopy.push(move.san);
+
+      set({ gameHistory: historyCopy });
+    }
+
     return true;
   },
 
@@ -86,6 +127,8 @@ const useGameStore = create((set, get) => ({
       game: new Chess(),
       gameFen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
       pawnFen: "8/pppppppp/8/8/8/8/PPPPPPPP/8",
+      isPgnMode: false,
+      gameHistory: [],
     }),
 }));
 

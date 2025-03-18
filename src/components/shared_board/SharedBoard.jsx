@@ -3,6 +3,7 @@
 import { toast } from "react-toastify";
 import { Chess } from "chess.js";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import MainBoard from "@/components/shared_board/MainBoard";
 import PawnBoard from "@/components/shared_board/PawnBoard";

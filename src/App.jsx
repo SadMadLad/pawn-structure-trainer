@@ -10,7 +10,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/other-page" element={<OtherPage />} />
+          <Route path="/v2" element={<OtherPage />} />
         </Routes>
         <div className="fixed left-1/2 right-1/2 top-12 w-screen">
           <ToastContainer />
