@@ -69,7 +69,7 @@ export default function Controls() {
         <span>Export PGN</span>
       </button>
       <div
-        className={`grid max-h-[37.5rem] w-52 grid-cols-12 items-start gap-0.5 overflow-auto ${(pgn ?? "").trim() !== "" && "rounded border-[0.25px] border-black"}`}
+        className={`grid max-h-[37.5rem] w-52 grid-cols-12 items-start gap-px overflow-auto ${(pgn ?? "").trim() !== "" && "rounded border-[0.25px] border-black"}`}
       >
         {(isPgnMode
           ? gameHistory.reduce((acc, val, index) => {
@@ -88,16 +88,16 @@ export default function Controls() {
 
           return (
             <Fragment key={index}>
-              <div className="col-span-2 inline-flex h-full w-full items-center justify-center bg-stone-800 text-center font-bold text-white">
+              <div className="col-span-2 inline-flex h-full w-full items-center justify-center bg-stone-900 text-center font-bold text-white">
                 <span>{index + 1}.</span>
               </div>
               {whiteMove && (
-                <div className="col-span-5 bg-stone-700 p-2.5 font-bold text-white text-right">
+                <div className="col-span-5 bg-stone-800 p-2.5 font-bold text-stone-300 text-right">
                   {whiteMove}
                 </div>
               )}
               {blackMove && (
-                <div className="col-span-5 bg-stone-500 p-2.5 font-bold text-black text-left">
+                <div className="col-span-5 bg-stone-300 p-2.5 font-bold text-stone-800 text-left">
                   {blackMove}
                 </div>
               )}
