@@ -9,7 +9,7 @@ export default function Horizontal({ orientation }) {
     <div className={className}>
       {alphabets.map((alphabet) => (
         <p
-          className="flex-1 text-center border-chess-green border border-opacity-20"
+          className="flex-1 border border-chess-green border-opacity-20 text-center"
           key={alphabet}
         >
           {alphabet}

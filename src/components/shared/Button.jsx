@@ -3,7 +3,7 @@
 export default function Default({ content, method }) {
   return (
     <button
-      className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded"
+      className="rounded bg-gray-700 p-3 font-bold text-white hover:bg-gray-900"
       onClick={method}
     >
       {content}

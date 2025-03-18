@@ -18,10 +18,10 @@ export default function MainBoard({
 
   return (
     <div>
-      <div className="flex justify-center items-center mb-4">
+      <div className="mb-4 flex items-center justify-center">
         <input
           type="text"
-          className="mx-6 bg-slate-600 rounded-md text-center text-white font-semibold p-2 w-full"
+          className="mx-6 w-full rounded-md bg-slate-600 p-2 text-center font-semibold text-white"
         />
       </div>
       <Horizontal orientation={boardOrientation} />
@@ -45,7 +45,7 @@ export default function MainBoard({
         <Button content={">"} method={moveForward} />
       </div>
 
-      <div className="flex items-center justify-center my-2.5">
+      <div className="my-2.5 flex items-center justify-center">
         <Button
           method={() => setBoardOrientation((orientation) => !orientation)}
           content={"Flip Board"}

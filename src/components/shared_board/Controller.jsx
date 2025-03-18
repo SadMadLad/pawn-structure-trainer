@@ -13,9 +13,9 @@ export default function Controller({ moves }) {
   }, [moves]);
 
   return (
-    <div className="mt-6 bg-chess-darker border-red-500 border-4 h-full w-full text-white font-bold p-5 rounded">
+    <div className="mt-6 h-full w-full rounded border-4 border-red-500 bg-chess-darker p-5 font-bold text-white">
       <p
-        className="overflow-auto bg-chess-dark rounded flex flex-col h-full"
+        className="flex h-full flex-col overflow-auto rounded bg-chess-dark"
         style={{ width: 250, height: 400 }}
       >
         {moves.map((move, index) => (

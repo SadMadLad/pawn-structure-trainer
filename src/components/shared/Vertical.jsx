@@ -10,7 +10,7 @@ export default function Vertical({ height, orientation }) {
     <span className={className} style={{ height: height, width: 25 }}>
       {numbers.map((number) => (
         <p
-          className="flex-1 flex text-center justify-center items-center border border-chess-green border-opacity-20"
+          className="flex flex-1 items-center justify-center border border-chess-green border-opacity-20 text-center"
           key={number}
         >
           {number}
