@@ -90,7 +90,7 @@ export default function Controls() {
             <Fragment key={index}>
               {whiteMove && (
                 <div className="bg-stone-700 p-2.5 font-bold text-white">
-                  {whiteMove}
+                  {index + 1}. {whiteMove}
                 </div>
               )}
               {blackMove && (
