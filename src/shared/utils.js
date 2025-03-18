@@ -1,4 +1,4 @@
-function downloadFile(text, fileName = new Date().toISOString()) {
+function downloadFile(text, fileName = new Date().toISOString().replace(/\./g, "-") + ".pgn") {
   const blob = new Blob([text], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
