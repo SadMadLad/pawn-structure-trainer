@@ -62,14 +62,14 @@ export default function Controls() {
         />
       </div>
       <button
-        className="inline-flex gap-1 rounded-lg bg-gray-700 px-4 py-2.5 font-bold text-white"
+        className="inline-flex gap-y-1 rounded-lg bg-gray-700 px-4 py-2.5 font-bold text-white"
         onClick={downloadPgn}
       >
         <ArrowDownTrayIcon className="h-6 w-6" />
         <span>Export PGN</span>
       </button>
       <div
-        className={`grid max-h-[37.5rem] min-w-40 grid-cols-2 items-start gap-0.5 overflow-auto ${(pgn ?? "").trim() !== "" && "rounded border-[0.25px] border-black"}`}
+        className={`grid max-h-[37.5rem] w-52 grid-cols-12 items-start gap-0.5 overflow-auto ${(pgn ?? "").trim() !== "" && "rounded border-[0.25px] border-black"}`}
       >
         {(isPgnMode
           ? gameHistory.reduce((acc, val, index) => {
@@ -88,13 +88,16 @@ export default function Controls() {
 
           return (
             <Fragment key={index}>
+              <div className="col-span-2 inline-flex h-full w-full items-center justify-center bg-stone-800 text-center font-bold text-white">
+                <span>{index + 1}.</span>
+              </div>
               {whiteMove && (
-                <div className="bg-stone-700 p-2.5 font-bold text-white">
-                  {index + 1}. {whiteMove}
+                <div className="col-span-5 bg-stone-700 p-2.5 font-bold text-white">
+                  {whiteMove}
                 </div>
               )}
               {blackMove && (
-                <div className="bg-stone-500 p-2.5 font-bold text-black">
+                <div className="col-span-5 bg-stone-500 p-2.5 font-bold text-black">
                   {blackMove}
                 </div>
               )}
