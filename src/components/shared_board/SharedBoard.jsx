@@ -1,13 +1,14 @@
 /* The MainBoard and SharedBoard compiled */
 
-import { useState, useEffect } from "react";
-import { Chess } from "chess.js";
-
-import MainBoard from "./MainBoard";
-import PawnBoard from "./PawnBoard";
-import Controller from "./Controller";
-import Button from "../Shared/Button";
 import { toast } from "react-toastify";
+import { Chess } from "chess.js";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import MainBoard from "@/components/shared_board/MainBoard";
+import PawnBoard from "@/components/shared_board/PawnBoard";
+import Controller from "@/components/shared_board/Controller";
+import Button from "@/components/shared/Button";
 
 const WIDTH = 400;
 const fileReader = new FileReader();
@@ -143,7 +144,7 @@ export default function SharedBoard() {
         updateBoard(false, false, false, true);
         toast.success("PGN Imported Successfully!", { theme: "colored" });
       } catch (e) {
-        console.log(e)
+        console.log(e);
         toast.error("Could not import PGN", { theme: "colored" });
       }
     };
@@ -195,7 +196,7 @@ export default function SharedBoard() {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row justify-around items-center mt-5">
+    <div className="mt-5 flex flex-col items-center justify-around sm:flex-row">
       <div className="flex justify-center gap-5">
         <MainBoard
           game={game}
@@ -207,13 +208,13 @@ export default function SharedBoard() {
           gameName={gameName}
           boardOrientation={true}
         />
-        <div className="flex-grow-0 flex-auto h-5/6">
+        <div className="h-5/6 flex-auto flex-grow-0">
           <Controller moves={movesDisplay} />
           <div className="mt-4 flex flex-col items-center gap-2">
-            <div className="flex flex-wrap gap-2 mt-8">
+            <div className="mt-8 flex flex-wrap gap-2">
               <label
                 htmlFor="file-upload"
-                className="bg-gray-700 hover:bg-gray-900 text-white font-bold p-3 rounded"
+                className="rounded bg-gray-700 p-3 font-bold text-white hover:bg-gray-900"
               >
                 Import PGN
               </label>
@@ -227,7 +228,7 @@ export default function SharedBoard() {
             </div>
             <div className="flex flex-wrap gap-2">
               <button
-                className={`${freeMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} text-white font-bold p-3 rounded`}
+                className={`${freeMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} rounded p-3 font-bold text-white`}
                 onClick={() => setFreeMode((mode) => !mode)}
               >
                 Free Mode: {freeMode ? "ON" : "OFF"}
@@ -235,7 +236,7 @@ export default function SharedBoard() {
             </div>
             <div className="flex flex-wrap gap-2">
               <button
-                className={`${pawnOnlyMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} text-white font-bold p-3 rounded`}
+                className={`${pawnOnlyMode ? "bg-green-600 hover:bg-green-800" : "bg-gray-700 hover:bg-gray-900"} rounded p-3 font-bold text-white`}
                 onClick={() => setPawnOnlyMode((mode) => !mode)}
               >
                 Pawn Only: {pawnOnlyMode ? "ON" : "OFF"}
