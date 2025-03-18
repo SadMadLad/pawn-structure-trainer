@@ -92,12 +92,12 @@ export default function Controls() {
                 <span>{index + 1}.</span>
               </div>
               {whiteMove && (
-                <div className="col-span-5 bg-stone-700 p-2.5 font-bold text-white">
+                <div className="col-span-5 bg-stone-700 p-2.5 font-bold text-white text-right">
                   {whiteMove}
                 </div>
               )}
               {blackMove && (
-                <div className="col-span-5 bg-stone-500 p-2.5 font-bold text-black">
+                <div className="col-span-5 bg-stone-500 p-2.5 font-bold text-black text-left">
                   {blackMove}
                 </div>
               )}
